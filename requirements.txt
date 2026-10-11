@@ -1,0 +1,16 @@
+# 天枢 TianShu — 最小依赖（核心栈）
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.5.0
+
+# ---- 可选增强（缺失时自动降级，不会崩溃）----
+# pip install -e ".[full]" 会一并安装
+xgboost>=2.0        # GBM SOTA 后端
+lightgbm>=4.6.0 # 快速 GBM 后端
+optuna>=3.4         # TPE 采样器
+pandas>=2.0
+matplotlib>=3.7
+
+# ---- 开发 ----
+pytest>=7.4
+ruff>=0.4

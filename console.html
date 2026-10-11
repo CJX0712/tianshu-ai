@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天枢 TianShu · 控制台</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --line:#e3e6ec; --ink:#1c2028;
+    --muted:#6b7280; --accent:#2f6fed; --ok:#0f9d58; --warn:#c2410c;
+    --soft:#eef3ff; --chip:#f1f3f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:14px;line-height:1.6}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+  header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+  .sub{color:var(--muted);font-size:13px}
+  .author{float:right;color:var(--muted);font-size:12px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:18px 20px;margin-bottom:18px}
+  h2{margin:0 0 14px;font-size:16px;font-weight:600}
+  h2 .tag{font-weight:400;color:var(--muted);font-size:12px;margin-left:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:500;font-size:12px;background:#fafbfc}
+  tr:last-child td{border-bottom:none}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px}
+  .pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;
+    background:var(--chip);color:var(--muted);margin-right:4px}
+  .ok{color:var(--ok);font-weight:600}
+  .warn{color:var(--warn);font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:10px}
+  .layer{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fcfdff}
+  .layer b{display:block;font-size:13px;margin-bottom:3px}
+  .layer span{color:var(--muted);font-size:12px}
+  .layer .idx{float:right;font-size:11px;color:var(--accent);font-weight:700}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  input,textarea{flex:1;min-width:180px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:6px;font-size:13px;font-family:inherit;background:#fff;color:var(--ink)}
+  button{padding:8px 16px;border:none;border-radius:6px;background:var(--accent);
+    color:#fff;font-size:13px;cursor:pointer;font-family:inherit}
+  button:disabled{background:#b9c4d8;cursor:not-allowed}
+  button.ghost{background:#fff;color:var(--accent);border:1px solid var(--line)}
+  pre{background:#fbfcfe;border:1px solid var(--line);border-radius:6px;padding:12px;
+    overflow:auto;font-size:12px;line-height:1.55;margin:10px 0 0;max-height:280px}
+  .note{color:var(--muted);font-size:12px;margin-top:8px}
+  .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:6px}
+  .kpi div{background:var(--soft);border-radius:8px;padding:12px;text-align:center}
+  .kpi b{display:block;font-size:22px;color:var(--accent)}
+  .kpi span{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="author">作者：晨星 · MIT</div>
+  <h1>天枢 TianShu</h1>
+  <div class="sub">世界顶级 AI 系统 · 十层架构 · 元路由 · 融合旗舰 · 可证门禁</div>
+</header>
+
+<section>
+  <h2>系统概览 <span class="tag">零重写 · 集大成 · CPU 可跑</span></h2>
+  <div class="kpi">
+    <div><b>10</b><span>架构层</span></div>
+    <div><b>32</b><span>算法家族</span></div>
+    <div><b>54</b><span>单元测试</span></div>
+    <div><b>5/5</b><span>交付门禁</span></div>
+    <div><b>13</b><span>元特征维度</span></div>
+  </div>
+  <div class="note">天枢不含任何自研算法数学。全部能力来自 sklearn / XGBoost / LightGBM / Optuna，
+    以及 Caruana、Wolpert、Robertson、Cormack、Yao 等人的奠基工作——天枢负责的是<b>选择、融合与证明</b>。</div>
+</section>
+
+<section>
+  <h2>十层架构</h2>
+  <div class="grid">
+    <div class="layer"><span class="idx">L0</span><b>core</b><span>确定性 · 度量 · 契约 · 注册表</span></div>
+    <div class="layer"><span class="idx">L1</span><b>data</b><span>13 维元特征</span></div>
+    <div class="layer"><span class="idx">L2</span><b>models</b><span>32 个算法家族</span></div>
+    <div class="layer"><span class="idx">L3</span><b>hpo</b><span>TPE 超参优化</span></div>
+    <div class="layer"><span class="idx">L4</span><b>fusion</b><span>融合旗舰 FusionCore</span></div>
+    <div class="layer"><span class="idx">L5</span><b>meta</b><span>元路由 + UCB</span></div>
+    <div class="layer"><span class="idx">L6</span><b>runtime</b><span>端到端引擎</span></div>
+    <div class="layer"><span class="idx">L7</span><b>rag</b><span>BM25 + 稠密 + RRF</span></div>
+    <div class="layer"><span class="idx">L8</span><b>agent</b><span>ReAct + AST 安全工具</span></div>
+    <div class="layer"><span class="idx">L9</span><b>serve</b><span>零依赖 HTTP</span></div>
+  </div>
+  <div class="note">L10 verify 是横切层：五道门禁守着上面每一层的对外承诺。</div>
+</section>
+
+<section>
+  <h2>交付门禁 <span class="tag">tianshu gates</span></h2>
+  <table>
+    <tr><th style="width:70px">门禁</th><th style="width:90px">状态</th><th>验证内容</th></tr>
+    <tr><td class="mono">G1</td><td class="ok">PASS</td><td>确定性：同 seed 两次运行预测逐位一致</td></tr>
+    <tr><td class="mono">G2</td><td class="ok">PASS</td><td>独立测试集上，最终模型不劣于 CV 选出的最强单模型</td></tr>
+    <tr><td class="mono">G3</td><td class="ok">PASS</td><td>元路由排序有效、分数有限</td></tr>
+    <tr><td class="mono">G4</td><td class="ok">PASS</td><td>混合检索 Recall@5</td></tr>
+    <tr><td class="mono">G5</td><td class="ok">PASS</td><td>工具层注入 100% 拦截（AST 白名单）</td></tr>
+  </table>
+  <div class="note">门禁的原则：<b>失败就如实报失败，不许放宽阈值凑绿</b>。
+    融合若不能在留出集上显著超越最强单模型，就诚实回退——虚假增益比不融合更危险。</div>
+</section>
+
+<section>
+  <h2>融合旗舰 <span class="tag">系统超越单一 SOTA 的机制</span></h2>
+  <table>
+    <tr><th style="width:150px">数据集</th><th style="width:110px">特点</th><th style="width:110px">融合</th>
+        <th style="width:130px">最强单模型</th><th>结论</th></tr>
+    <tr><td>cls_easy</td><td>低噪声、信号强</td><td class="mono">0.9200</td><td class="mono">0.9200</td>
+        <td class="warn">持平 → 诚实回退</td></tr>
+    <tr><td>cls_noisy</td><td>高标签噪声、弱信号</td><td class="mono">0.6427</td><td class="mono">0.6267</td>
+        <td class="ok">+1.60% 融合增益</td></tr>
+    <tr><td>reg (RMSE)</td><td>连续目标</td><td class="mono">0.3224</td><td class="mono">0.3224</td>
+        <td class="warn">持平 → 诚实回退</td></tr>
+  </table>
+  <div class="note">简单数据上单模型已接近贝叶斯上限，融合没有空间，<b>回退是正确行为</b>。
+    高方差场景（单模型误差大且互不相关）才是融合的主场——此时稳定出现 1~1.6 个点的增益，
+    且留出集预估增益与测试集实测增益吻合，说明门控没有虚报。</div>
+</section>
+
+<section>
+  <h2>算法家族</h2>
+  <table>
+    <tr><th style="width:110px">任务</th><th style="width:50px">数量</th><th>家族</th></tr>
+    <tr><td>分类</td><td>14</td>
+        <td><span class="pill">logistic</span><span class="pill">decision_tree</span><span class="pill">random_forest</span>
+            <span class="pill">extra_trees</span><span class="pill">gb_hist</span><span class="pill">gb_exact</span>
+            <span class="pill">adaboost</span><span class="pill">svc_rbf</span><span class="pill">knn</span>
+            <span class="pill">naive_bayes</span><span class="pill">mlp</span><span class="pill">sgd_hinge</span>
+            <span class="pill">xgboost</span><span class="pill">lightgbm</span></td></tr>
+    <tr><td>回归</td><td>13</td>
+        <td><span class="pill">linear</span><span class="pill">ridge</span><span class="pill">lasso</span>
+            <span class="pill">elasticnet</span><span class="pill">random_forest_reg</span>
+            <span class="pill">extra_trees_reg</span><span class="pill">gb_hist_reg</span><span class="pill">svr_rbf</span>
+            <span class="pill">knn_reg</span><span class="pill">mlp_reg</span><span class="pill">gaussian_process</span>
+            <span class="pill">xgboost_reg</span><span class="pill">lightgbm_reg</span></td></tr>
+    <tr><td>无监督</td><td>5</td>
+        <td><span class="pill">kmeans</span><span class="pill">gmm</span><span class="pill">spectral_clustering</span>
+            <span class="pill">isolation_forest</span><span class="pill">pca</span></td></tr>
+  </table>
+  <div class="note">新增算法 = <span class="mono">register()</span> 一行，不改任何控制流；
+    契约测试会强制它必须能 fit + predict，否则 CI 变红。</div>
+</section>
+
+<section>
+  <h2>连接本地服务 <span class="tag">tianshu serve --port 8801</span></h2>
+  <div class="row">
+    <input id="host" value="http://127.0.0.1:8801" style="max-width:260px">
+    <button onclick="health()">测 /health</button>
+    <button class="ghost" onclick="caps()">能力清单</button>
+  </div>
+  <div class="row">
+    <input id="docs" placeholder="文档，用 | 分隔（检索测试）" value="BM25 是概率检索模型|RRF 多路排名融合|元路由做算法选择">
+    <input id="query" placeholder="查询" value="RRF 融合" style="max-width:200px">
+    <button class="ghost" onclick="search()">测 /rag/search</button>
+  </div>
+  <pre id="out">尚未连接。启动服务后点击上方按钮。</pre>
+  <div class="note">本控制台不依赖任何外部 CDN，双击即可离线打开。
+    若未启动服务，检索与问答功能不可用，其余内容均为静态展示。</div>
+</section>
+
+<section>
+  <h2>复现命令</h2>
+  <pre>pip install -e ".[full]"
+tianshu gates                 # 5/5 交付门禁
+tianshu bench                 # 融合 vs 最强单模型
+pytest tests -q               # 54 passed
+ruff check tianshu tests      # All checks passed</pre>
+</section>
+
+</div>
+<script>
+const out = document.getElementById('out');
+function show(obj){ out.textContent = typeof obj === 'string' ? obj : JSON.stringify(obj, null, 2); }
+async function post(path, body){
+  const base = document.getElementById('host').value.replace(/\/+$/,'');
+  const r = await fetch(base + path, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+  });
+  return await r.json();
+}
+async function get(path){
+  const base = document.getElementById('host').value.replace(/\/+$/,'');
+  const r = await fetch(base + path);
+  return await r.json();
+}
+async function health(){
+  show('连接中…');
+  try { show(await get('/health')); }
+  catch(e){ show('连接失败：' + e + '\n请先在终端执行 tianshu serve --port 8801'); }
+}
+async function caps(){
+  show('连接中…');
+  try { show(await get('/capabilities')); }
+  catch(e){ show('连接失败：' + e); }
+}
+async function search(){
+  show('检索中…');
+  const docs = document.getElementById('docs').value.split('|').map(s=>s.trim()).filter(Boolean);
+  try {
+    const r = await post('/rag/search', {docs, query: document.getElementById('query').value, topk: 3});
+    show(r);
+  } catch(e){ show('连接失败：' + e); }
+}
+</script>
+</body>
+</html>

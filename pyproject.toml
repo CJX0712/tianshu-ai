@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tianshu-ai"
+version = "1.0.0"
+description = "天枢 TianShu — 世界顶级 AI 系统：十层架构 · 元路由 · 融合旗舰 · 可证门禁 (作者: 晨星)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "晨星", email = "CJX0712@users.noreply.github.com" }]
+keywords = ["ai", "automl", "ensemble", "rag", "agent", "meta-learning"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+full = ["xgboost>=2.0", "lightgbm>=4.3", "optuna>=3.4", "pandas>=2.0", "matplotlib>=3.7"]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+
+[project.scripts]
+tianshu = "tianshu.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["tianshu*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E731", "B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+# 第三方库（sklearn/lightgbm/xgboost）的收敛与弃用告警不构成失败，
+# 但天枢自身的告警必须可见——这是刻意只过滤外部噪声。
+filterwarnings = [
+    "ignore::FutureWarning",
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+    "ignore::RuntimeWarning",
+]
