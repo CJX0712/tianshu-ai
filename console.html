@@ -113,14 +113,17 @@
         <th style="width:130px">最强单模型</th><th>结论</th></tr>
     <tr><td>cls_easy</td><td>低噪声、信号强</td><td class="mono">0.9200</td><td class="mono">0.9200</td>
         <td class="warn">持平 → 诚实回退</td></tr>
-    <tr><td>cls_noisy</td><td>高标签噪声、弱信号</td><td class="mono">0.6427</td><td class="mono">0.6267</td>
-        <td class="ok">+1.60% 融合增益</td></tr>
+    <tr><td>cls_noisy</td><td>高标签噪声、弱信号</td><td class="mono">0.6427</td><td class="mono">0.6427</td>
+        <td class="warn">增益未过显著性检验 → 回退</td></tr>
     <tr><td>reg (RMSE)</td><td>连续目标</td><td class="mono">0.3224</td><td class="mono">0.3224</td>
         <td class="warn">持平 → 诚实回退</td></tr>
   </table>
-  <div class="note">简单数据上单模型已接近贝叶斯上限，融合没有空间，<b>回退是正确行为</b>。
-    高方差场景（单模型误差大且互不相关）才是融合的主场——此时稳定出现 1~1.6 个点的增益，
-    且留出集预估增益与测试集实测增益吻合，说明门控没有虚报。</div>
+  <div class="note">天枢在这些数据集上<b>没有</b>靠融合拿到增益：简单数据上单模型已接近贝叶斯上限（没空间）；
+    高噪声数据上融合虽有 1~1.5% 的名义增益，但留出集仅约 240 样本，
+    标准误就有 3.1%，<b>统计上无法与噪声区分</b>，显著性门控因此拒绝采纳。<br>
+    开发时见过一次反例：关闭显著性门控，融合在留出集上 +1.33%、独立测试集上却是 <b>−0.27%</b>。
+    宁可错过真增益，也不能产出会伤害用户的虚假增益。<br>
+    天枢在任何情况下保证：<b>最终交付的模型不会比 CV 选出的最强单模型更差</b>（G2 门禁）。</div>
 </section>
 
 <section>

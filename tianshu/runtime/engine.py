@@ -246,19 +246,28 @@ class Tianshu:
         return np.asarray(np.tensordot(w, P, axes=(0, 0)))
 
     def predict_proba(self, X) -> np.ndarray | None:
-        if self.task_ != "classification" or not self.models_:
+        if self.task_ != "classification" or not self.models_ or self.fusion_ is None:
             return None
         X = np.asarray(X)
+        C = len(self.classes_) if self.classes_ is not None else 0
         parts, ws = [], []
         for i, name in enumerate(self.models_):
-            p = self.models_[name].predict_proba(X)
-            if p is None:
-                continue
-            parts.append(p)
-            ws.append(self.fusion_.weights[i])
+            w_i = float(self.fusion_.weights[i])
+            if w_i <= 0.0:
+                continue          # 权重为 0 的候选不参与，保持与 predict 一致
+            est = self.models_[name]
+            p = est.predict_proba(X)
+            # 与 predict 同一套兜底：类别数取自训练集，不支持 proba 时用 one-hot。
+            # 少了这一步，若被选中的恰好是不支持 proba 的模型（如 SVC / hinge 线性），
+            # 权重和会变成 0，输出全零矩阵——这是测出来的真实 bug。
+            if p is None or (C and p.shape[1] != C):
+                labs = est.predict(X)
+                idx = np.clip(np.searchsorted(self.classes_, labs), 0, C - 1)
+                p = np.eye(C)[idx]
+            parts.append(np.asarray(p))
+            ws.append(w_i)
         if not parts:
             return None
-        parts = [p for p in parts]
         C = min(p.shape[1] for p in parts)
         parts = [p[:, :C] for p in parts]
         w = np.array(ws) / max(sum(ws), 1e-12)
