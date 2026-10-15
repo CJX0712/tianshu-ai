@@ -1,5 +1,12 @@
 # 天枢 TianShu · 世界顶级 AI 系统
 
+<div align="center">
+
+[![License](https://img.shields.io/badge/License-MIT-green)](https://github.com/CJX0712/tianshu-ai/blob/main/LICENSE) [![Language](https://img.shields.io/badge/Python-3776AB?logo=python)](https://github.com/CJX0712/tianshu-ai) [![Author](https://img.shields.io/badge/author-晨星-blueviolet)](https://github.com/CJX0712)
+
+</div>
+
+
 > **零重写 · 集大成 · 闭环可验证**
 >
 > 不造轮子，只做裁判与指挥官：把世界顶级数学、算法、开源实现编成一个会自己选算法、
